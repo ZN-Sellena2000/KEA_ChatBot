@@ -8,7 +8,7 @@ import { atom, selector } from "recoil";
 
 export const recoilEntRState = atom({
   key: "recoilEntRState",
-  default: "",
+  default: "13, 2, 5, 45, 14, 16, 30",
 });
 
 export const recoilEntRSelector = selector({
@@ -16,6 +16,7 @@ export const recoilEntRSelector = selector({
   get: ({ get }) => {
     return get(recoilEntRState);
   },
+  set: ({ set }, newValue) => set(recoilEntRState, newValue),
 });
 
 export const recoilEntState = atom({
@@ -51,5 +52,33 @@ export const recoilInputSelector = selector({
   key: "recoilInputSelector",
   get: ({ get }) => {
     return get(recoilInputState);
+  },
+});
+
+export const textState1 = atom({
+  key: "textState1",
+  default: "",
+});
+
+export const textState2 = atom({
+  key: "textState2",
+  default: "",
+});
+
+export const textSelector1 = selector({
+  key: "textSelector1", // unique ID (with respect to other atoms/selectors)
+  get: ({ get }) => {
+    const text = get(textState1);
+
+    return text;
+  },
+});
+
+export const textSelector2 = selector({
+  key: "textSelector2", // unique ID (with respect to other atoms/selectors)
+  get: ({ get }) => {
+    const text = get(textState2);
+
+    return text;
   },
 });
