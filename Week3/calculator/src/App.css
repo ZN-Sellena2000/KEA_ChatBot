@@ -1,0 +1,29 @@
+.App {
+  text-align: center;
+  background-color: aliceblue;
+  width: 50%;
+  margin: auto;
+  margin-top: 10%;
+}
+
+button {
+  width: 25%;
+  height: 100%;
+  float: left;
+  margin-left: 15%;
+  margin-right: 5%;
+}
+
+.calculator {
+  display: inline-block;
+  width: 50%;
+  margin: auto;
+}
+
+h1 {
+  background-color: rgb(0, 153, 255);
+}
+
+body {
+  background-color: rgb(49, 49, 187);
+}
