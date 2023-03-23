@@ -39,11 +39,23 @@ function RandNum(num) {
 
 function DrawEntNum() {
   // random number 7개 생성
-  const randNum7 = RandNum(7);
-  const setLotto = useSetRecoilState(randNum7);
-  const [entNum, setEntNum] = useRecoilState(recoilEntRState);
+  // value가 entNum일 때
   // recoilEntRState / Selector
   // string 형식으로 저장
+  const entRNum = RandNum(7);
+  const [entNum, setEntRNum] = useRecoilState(recoilEntRState);
+  const onClick = setEntRNum(RandNum(7));
+
+  return (
+    <div>
+      <p>{entRNum}</p>
+      <button value={entNum} onClick={onClick}>
+        Generate Your Luck!
+      </button>
+      <br />
+      Echo: {entNum}
+    </div>
+  );
 }
 
 function DrawLottoNum() {
