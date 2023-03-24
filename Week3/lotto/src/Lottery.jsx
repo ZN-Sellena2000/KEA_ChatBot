@@ -18,6 +18,7 @@ import {
   textSelector1,
   textState2,
   textSelector2,
+  matchingState,
 } from "./atoms";
 
 // // 어떤 함수들이 존재할지 고민
@@ -56,7 +57,7 @@ function DrawEntNum() {
   const [rNum, setRNum] = useRecoilState(recoilEntRState);
 
   const onClick = (event) => {
-    setRNum(RandNum(7));
+    setRNum(randomNum);
   };
 
   console.log("randomNum", randomNum);
@@ -64,7 +65,7 @@ function DrawEntNum() {
   return (
     <div>
       <button className="buttonText" value={rNum} onClick={onClick}>
-        <p>Regenerate Your Luck!</p>
+        <p>Generate Your Luck!</p>
       </button>
     </div>
   );
@@ -161,34 +162,40 @@ function Matching() {
 
   var matchingCount = 0;
 
-  const onClick = (event) => {
+  const [mNum, setMNum] = useRecoilState(matchingState);
+
+  const onClick = () => {
     const intersection = lottoNum.filter((x) => drawNum.includes(x));
+    console.log("intersection", intersection);
     matchingCount = intersection.length;
+    console.log("matchingCount", matchingCount);
+    //리코일 사용해서 값 공유하기
+    setMNum(matchingCount);
   };
+
+  console.log("matchingCount2", matchingCount);
+  console.log("lottoNum", lottoNum);
+  console.log("drawNum", drawNum);
+
+  const mCount = useRecoilValue(matchingState);
 
   return (
     <div>
-      <button>
-        <p className="buttonText" onClick={onClick}>
-          &nbsp;&nbsp;Try!&nbsp;&nbsp;
-        </p>
+      <button className="buttonText" value={mNum} onClick={onClick}>
+        <p>&nbsp;&nbsp;Try!&nbsp;&nbsp;</p>
       </button>
-      <p>Matching Count : {matchingCount}</p>
+      <p>Matching Count : {mCount}</p>
     </div>
   );
 }
 
 export default function Lottery() {
-  // const entNum = useRecoilValue(recoilEntState);
-  // const digit = useRecoilValue(textSelector1);
-  // const digit2 = useRecoilValue(textSelector2);
   return (
     <RecoilRoot>
       <div>
         <h1>GCU Lotto</h1>
         <h2>Your Lottery Number is...</h2>
         <DisplayEntLotto />
-        {/* <p className="LotteryNum">{entNum}</p> */}
         <h4>Enter 2 more numbers and try your Luck!</h4>
         <InputNum />
         <DrawEntNum />
