@@ -8,7 +8,7 @@ import { atom, selector } from "recoil";
 
 export const recoilEntRState = atom({
   key: "recoilEntRState",
-  default: "13, 2, 5, 45, 14, 16, 30",
+  default: "",
 });
 
 export const recoilEntRSelector = selector({
@@ -82,3 +82,33 @@ export const textSelector2 = selector({
     return text;
   },
 });
+
+export const matchingState = atom({
+  key: "matchingState",
+  default: "",
+});
+
+export const matchingCount = selector({
+  key: "matchingCount",
+  get: ({ get }) => {
+    const text = get(matchingState);
+    return text;
+  },
+  set: ({ set }, newValue) => set(matchingState, newValue),
+});
+
+const [rNum, setRNum] = useRecoilState(recoilEntRState);
+
+const onClick = (event) => {
+  setRNum(randomNum);
+};
+
+console.log("randomNum", randomNum);
+
+return (
+  <div>
+    <button className="buttonText" value={rNum} onClick={onClick}>
+      <p>Generate Your Luck!</p>
+    </button>
+  </div>
+);
